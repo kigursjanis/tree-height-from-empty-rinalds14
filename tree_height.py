@@ -1,3 +1,4 @@
+#221RDB489 Rinalds Dobelis 16.grupa
 import sys
 import threading
 
@@ -26,10 +27,23 @@ def compute_height(n, parents):
 
 
 def main():
-    n = int(input())
-    parents = list(map(int, input().split()))
+    input_type = input("I vai F")
 
-    print(compute_height(n, parents))
+    if 'I' in input_type:
+        n = int(input())
+        parents = list(map(int, input().split()))
+        height = compute_height(n, parents)
+        print(height)
+    elif 'F' in input_type:
+        filename = input("faila nosaukums: ")
+        with open("test/" + filename, 'r') as f:
+            n = int(f.readline())
+            parents = list(map(int, f.readline().split()))
+            height = compute_height(n, parents)
+            print(height)
+    else:
+        print("Invalids")
+        exit()
 
 
 # In Python, the default limit on recursion depth is rather low,
