@@ -1,10 +1,8 @@
-#221RDB489 Rinalds Dobelis 16.grupa
 import sys
 import threading
 
 
-def compute_height(n, parents):
-    # izveido koku
+def calculate_tree_height(n, parents):
     children = [[] for _ in range(n)]
     for i in range(n):
         parent = parents[i]
@@ -12,8 +10,7 @@ def compute_height(n, parents):
             root = i
         else:
             children[parent].append(i)
-
-    # koka augstums 
+ 
     def compute_depth(node):
         if not children[node]:
             return 1
@@ -30,25 +27,23 @@ def main():
     input_type = input()
 
     if 'I' in input_type:
-        n = int(input())
-        parents = list(map(int, input().split()))
-        height = compute_height(n, parents)
-        print(height)
+        num_nodes = int(input())
+        node_parents = list(map(int, input().split()))
+        tree_height = calculate_tree_height(num_nodes, node_parents)
+        print(tree_height)
     elif 'F' in input_type:
-        filename = input()
-        with open("test/" + filename, 'r') as f:
-            n = int(f.readline())
-            parents = list(map(int, f.readline().split()))
-            height = compute_height(n, parents)
-            print(height)
+        file_name = input()
+        with open("test/" + file_name, 'r') as f:
+            num_nodes = int(f.readline())
+            node_parents = list(map(int, f.readline().split()))
+            tree_height = calculate_tree_height(num_nodes, node_parents)
+            print(tree_height)
     else:
-        print("Invalids")
+        print("invalid input")
         exit()
 
 
-# In Python, the default limit on recursion depth is rather low,
-# so raise it here for this problem. Note that to take advantage
-# of bigger stack, we have to launch the computation in a new thread.
-sys.setrecursionlimit(10**7)  # max depth of recursion
-threading.stack_size(2**27)   # new thread will get stack of such size
+
+sys.setrecursionlimit(10**7) 
+threading.stack_size(2**27)  
 threading.Thread(target=main).start()
