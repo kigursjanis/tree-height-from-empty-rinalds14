@@ -27,7 +27,7 @@ def compute_height(n, parents):
 
 
 def main():
-    input_type = input("I vai F")
+    input_type = input()
 
     if 'I' in input_type:
         n = int(input())
@@ -35,7 +35,7 @@ def main():
         height = compute_height(n, parents)
         print(height)
     elif 'F' in input_type:
-        filename = input("faila nosaukums: ")
+        filename = input()
         with open("test/" + filename, 'r') as f:
             n = int(f.readline())
             parents = list(map(int, f.readline().split()))
